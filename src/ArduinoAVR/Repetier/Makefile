@@ -33,15 +33,15 @@
 # $Id$
 
 TARGET = $(notdir $(CURDIR))
-INSTALL_DIR = D:/arduino/arduino-0022
+INSTALL_DIR = /opt/arduino-1.0.5
 UPLOAD_RATE = 38400
 AVRDUDE_PROGRAMMER = stk500v1
 PORT = COM10
-#MCU = atmega2560
+MCU = atmega2560
 #For "old" Arduino Mega
 #MCU = atmega1280
 #For Sanguinololu
-MCU = atmega644p 
+#MCU = atmega644p 
 F_CPU = 16000000
 
 
@@ -49,8 +49,8 @@ F_CPU = 16000000
 # Below here nothing should be changed...
 
 ARDUINO = $(INSTALL_DIR)/hardware/arduino/cores/arduino
-#AVR_TOOLS_PATH = /usr/bin
-AVR_TOOLS_PATH = d:/WinAVR/bin
+AVR_TOOLS_PATH = /usr/bin
+#AVR_TOOLS_PATH = d:/WinAVR/bin
 SRC =  $(ARDUINO)/pins_arduino.c $(ARDUINO)/wiring.c \
 $(ARDUINO)/wiring_analog.c $(ARDUINO)/wiring_digital.c \
 $(ARDUINO)/wiring_pulse.c \
