@@ -1142,7 +1142,14 @@ const char ext5_select_cmd[] PROGMEM = EXT5_SELECT_COMMANDS;
 const char ext5_deselect_cmd[] PROGMEM = EXT5_DESELECT_COMMANDS;
 #endif
 
-Extruder extruder[NUM_EXTRUDER] =
+// Define at least one extruder as the code references it whether there is one or not...
+#if NUM_EXTRUDER == 0
+#define NUM_EXTRUDER_MIN 1
+#else
+#define NUM_EXTRUDER_MIN NUM_EXTRUDER
+#endif // NUM_EXTRUDER
+
+Extruder extruder[NUM_EXTRUDER_MIN] =
 {
 #if NUM_EXTRUDER>0
     {
