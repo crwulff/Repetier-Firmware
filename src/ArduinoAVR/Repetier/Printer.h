@@ -392,10 +392,18 @@ public:
     {
         return (unitIsInches ? x*25.4 : x);
     }
+
+    /* Read four times to avoid noise on the line */
+    #define READ_ENDSTOP( pin, inverting) \
+        (READ(pin) != inverting) & \
+        (READ(pin) != inverting) & \
+        (READ(pin) != inverting) & \
+        (READ(pin) != inverting)
+
     static inline bool isXMinEndstopHit()
     {
 #if X_MIN_PIN>-1 && MIN_HARDWARE_ENDSTOP_X
-        return READ(X_MIN_PIN) != ENDSTOP_X_MIN_INVERTING;
+        return READ_ENDSTOP(X_MIN_PIN, ENDSTOP_X_MIN_INVERTING);
 #else
         return false;
 #endif
@@ -403,7 +411,7 @@ public:
     static inline bool isYMinEndstopHit()
     {
 #if Y_MIN_PIN>-1 && MIN_HARDWARE_ENDSTOP_Y
-        return READ(Y_MIN_PIN) != ENDSTOP_Y_MIN_INVERTING;
+        return READ_ENDSTOP(Y_MIN_PIN, ENDSTOP_Y_MIN_INVERTING);
 #else
         return false;
 #endif
@@ -411,7 +419,7 @@ public:
     static inline bool isZMinEndstopHit()
     {
 #if Z_MIN_PIN>-1 && MIN_HARDWARE_ENDSTOP_Z
-        return READ(Z_MIN_PIN) != ENDSTOP_Z_MIN_INVERTING;
+        return READ_ENDSTOP(Z_MIN_PIN, ENDSTOP_Z_MIN_INVERTING);
 #else
         return false;
 #endif
@@ -419,7 +427,7 @@ public:
     static inline bool isXMaxEndstopHit()
     {
 #if X_MAX_PIN>-1 && MAX_HARDWARE_ENDSTOP_X
-        return READ(X_MAX_PIN) != ENDSTOP_X_MAX_INVERTING;
+        return READ_ENDSTOP(X_MAX_PIN, ENDSTOP_X_MAX_INVERTING);
 #else
         return false;
 #endif
@@ -427,7 +435,7 @@ public:
     static inline bool isYMaxEndstopHit()
     {
 #if Y_MAX_PIN>-1 && MAX_HARDWARE_ENDSTOP_Y
-        return READ(Y_MAX_PIN) != ENDSTOP_Y_MAX_INVERTING;
+        return READ_ENDSTOP(Y_MAX_PIN, ENDSTOP_Y_MAX_INVERTING);
 #else
         return false;
 #endif
@@ -435,7 +443,7 @@ public:
     static inline bool isZMaxEndstopHit()
     {
 #if Z_MAX_PIN>-1 && MAX_HARDWARE_ENDSTOP_Z
-        return READ(Z_MAX_PIN) != ENDSTOP_Z_MAX_INVERTING;
+        return READ_ENDSTOP(Z_MAX_PIN, ENDSTOP_Z_MAX_INVERTING);
 #else
         return false;
 #endif
